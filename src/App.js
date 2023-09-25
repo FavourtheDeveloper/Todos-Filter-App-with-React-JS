@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Todos from "./components/Todos";
+
+import todoz from "./data"
+
 
 function App() {
+  const [filterData, setFilterData] = useState(todoz)
+  const [query, setQuery] = useState("")
+
+  let filtTodoz = [];
+
+  const onWrite = (e) => {
+    setQuery(e.target.value)
+    const newFilt = filterData.filter((todo) => todo.title.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) !== -1)
+    setFilterData(newFilt)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    < Navbar onWrite={onWrite} />
+    <Todos todoz ={filterData} filtTodoz={filtTodoz} />
+    </>
   );
 }
 
