@@ -6,21 +6,22 @@ import todoz from "./data"
 
 
 function App() {
-  const [filterData, setFilterData] = useState(todoz)
-  const [query, setQuery] = useState("")
+  const [filtTodoz, setFiltTodoz] = useState(todoz)
 
-  let filtTodoz = [];
 
   const onWrite = (e) => {
-    setQuery(e.target.value)
-    const newFilt = filterData.filter((todo) => todo.title.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) !== -1)
-    setFilterData(newFilt)
+    e.preventDefault();
+    const val = e.target.elements.theVal.value
+    const filteredTodosz = todoz.filter((todo) => todo.title.toLowerCase().includes(val.toLowerCase()))
+    
+    setFiltTodoz(filteredTodosz)
+
   }
 
   return (
     <>
     < Navbar onWrite={onWrite} />
-    <Todos todoz ={filterData} filtTodoz={filtTodoz} />
+    <Todos todoz ={filtTodoz} />
     </>
   );
 }
