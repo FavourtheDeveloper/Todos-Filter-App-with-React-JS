@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Todos from "./components/Todos";
 
 import todoz from "./data"
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     <>
     < Navbar onWrite={onWrite} />
     <Todos todoz ={filtTodoz} />
+    <Footer />
     </>
   );
 }
